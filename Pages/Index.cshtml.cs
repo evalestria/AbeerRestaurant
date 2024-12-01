@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Mvc;
+using AbeerRestaurant.Data;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 
@@ -12,6 +12,8 @@ namespace AbeerRestaurant.Pages
         {
             _logger = logger;
         }
+
+        private readonly AbeerRestaurantContext _db;
 
         public void OnGet()
         {
