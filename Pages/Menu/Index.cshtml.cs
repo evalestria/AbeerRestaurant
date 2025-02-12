@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using AbeerRestaurant.Data;
 using AbeerRestaurant.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace AbeerRestaurant.Pages.Menu
 {
+    [Authorize]
     public class IndexModel : PageModel
     {
         private readonly AbeerRestaurant.Data.AbeerRestaurantContext _context;
