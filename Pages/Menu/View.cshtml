@@ -1,0 +1,30 @@
+﻿@page
+@model AbeerRestaurant.Pages.Menu.ViewModel
+
+@{
+    ViewData["Title"] = "Menu";
+}
+
+<h1>Menu</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.FoodItem[0].Item_name)</th>
+            <th>@Html.DisplayNameFor(model => model.FoodItem[0].Item_desc)</th>
+            <th>@Html.DisplayNameFor(model => model.FoodItem[0].Vegetarian)</th>
+            <th>@Html.DisplayNameFor(model => model.FoodItem[0].Price)</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.FoodItem)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.Item_name)</td>
+                <td>@Html.DisplayFor(modelItem => item.Item_desc)</td>
+                <td>@Html.DisplayFor(modelItem => item.Vegetarian)</td>
+                <td>@Html.DisplayFor(modelItem => item.Price)</td>
+            </tr>
+        }
+    </tbody>
+</table>

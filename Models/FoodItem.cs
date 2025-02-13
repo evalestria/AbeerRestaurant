@@ -14,7 +14,7 @@ namespace AbeerRestaurant.Models
 
         [StringLength(255)]
         public string Item_desc { get; set; }
-        public Nullable<bool> Available { get; set; }
+        public bool Available { get; set; }
         public bool? Vegetarian { get; set; }
 
         [DataType(DataType.Currency)]
