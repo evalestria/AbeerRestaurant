@@ -35,6 +35,13 @@
                             </li>
                         }
 
+                        <li class="nav-item ms-auto">
+                            <a class="nav-link text-dark" asp-page="/Menu/Checkout">
+                                🛒 Cart: <span id="cartTotalPrice">£0.00</span>
+                            </a>
+                        </li>
+
+
                         <!-- Login, Register, Logout -->
                         <li class="nav-item ms-auto">
                             @if (User.Identity.IsAuthenticated)
@@ -69,7 +76,7 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2024 - AbeerRestaurant - <a asp-area="" asp-page="/Privacy">Privacy</a>
+            &copy; 2025 - AbeerRestaurant
         </div>
     </footer>
 
@@ -78,5 +85,21 @@
     <script src="~/js/site.js" asp-append-version="true"></script>
 
     @await RenderSectionAsync("Scripts", required: false)
+
+    <!-- Cart Total Update Script -->
+    <script>
+        async function updateCartDisplay() {
+            try {
+                let response = await fetch('/Menu/Checkout?handler=CartTotal'); 
+                let totalPrice = await response.text();
+                document.getElementById("cartTotalPrice").innerText = "$" + parseFloat(totalPrice).toFixed(2);
+            } catch (error) {
+                console.error("Failed to load cart total:", error);
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", updateCartDisplay);
+    </script>
+
 </body>
 </html>

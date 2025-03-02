@@ -126,6 +126,12 @@ namespace AbeerRestaurant.Pages
         {
             HttpContext.Session.Remove("Cart");
         }
+
+        public IActionResult OnGetCartTotal()
+        {
+            LoadCart();
+            return Content(TotalPrice.ToString());
+        }
     }
 
     public class CartItem
@@ -133,4 +139,5 @@ namespace AbeerRestaurant.Pages
         public FoodItem FoodItem { get; set; }
         public int Quantity { get; set; }
     }
+
 }
