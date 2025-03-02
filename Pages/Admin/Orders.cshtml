@@ -1,0 +1,40 @@
+﻿@page
+@model AbeerRestaurant.Pages.Admin.OrdersModel
+@{
+    ViewData["Title"] = "View Orders";
+}
+
+<h1>View Orders</h1>
+
+@if (Model.Orders.Count == 0)
+{
+    <p>No orders have been placed yet.</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Order ID</th>
+                <th>User</th>
+                <th>Total Price</th>
+                <th>Order Date</th>
+                <th>Details</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var order in Model.Orders)
+            {
+                <tr>
+                    <td>@order.ID</td>
+                    <td>@order.UserEmail</td>
+                    <td>@order.TotalPrice</td>
+                    <td>@order.OrderDate</td>
+                    <td>
+                        <a asp-page="/Admin/OrderDetails" asp-route-id="@order.ID" class="btn btn-info">View Details</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

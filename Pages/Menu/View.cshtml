@@ -1,6 +1,5 @@
 ﻿@page
 @model AbeerRestaurant.Pages.Menu.ViewModel
-
 @{
     ViewData["Title"] = "Menu";
 }
@@ -18,21 +17,35 @@
 <table class="table">
     <thead>
         <tr>
-            <th>@Html.DisplayNameFor(model => model.FoodItem[0].Item_name)</th>
-            <th>@Html.DisplayNameFor(model => model.FoodItem[0].Item_desc)</th>
-            <th>@Html.DisplayNameFor(model => model.FoodItem[0].Vegetarian)</th>
-            <th>@Html.DisplayNameFor(model => model.FoodItem[0].Price)</th>
+            <th>Item Name</th>
+            <th>Description</th>
+            <th>Vegetarian</th>
+            <th>Price</th>
+            <th>Action</th>
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model.FoodItem)
         {
             <tr>
-                <td>@Html.DisplayFor(modelItem => item.Item_name)</td>
-                <td>@Html.DisplayFor(modelItem => item.Item_desc)</td>
+                <td>@item.Item_name</td>
+                <td>@item.Item_desc</td>
                 <td>@(item.Vegetarian == true ? "Yes" : "No")</td>
-                <td>@Html.DisplayFor(modelItem => item.Price)</td>
+                <td>@item.Price</td>
+                <td>
+                    <form method="post">
+                        <input type="hidden" name="ItemId" value="@item.ID" />
+                        <button type="submit" asp-page-handler="AddToCart" class="btn btn-success">Add to Cart</button>
+                    </form>
+                </td>
             </tr>
         }
     </tbody>
 </table>
+
+@if (User.Identity.IsAuthenticated)
+{
+    <p>
+        <a asp-page="/Menu/Checkout" class="btn btn-primary">Go to Checkout</a>
+    </p>
+}

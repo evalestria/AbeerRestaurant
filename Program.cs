@@ -32,6 +32,15 @@ builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
     .AddEntityFrameworkStores<ApplicationDbContext>()
     .AddDefaultTokenProviders();
 
+// Enable session services
+builder.Services.AddDistributedMemoryCache(); // Required for session storage
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(30); // Session timeout duration
+    options.Cookie.HttpOnly = true; // Prevents client-side access to session cookie
+    options.Cookie.IsEssential = true; // Ensures session works without cookie consent
+});
+
 // Enable developer exception pages for database errors
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
@@ -63,6 +72,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+app.UseSession();
 
 app.UseAuthentication(); // Enable authentication middleware
 app.UseAuthorization();

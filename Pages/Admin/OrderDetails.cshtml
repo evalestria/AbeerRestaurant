@@ -1,0 +1,46 @@
+﻿@page "{id:int}"
+@model AbeerRestaurant.Pages.Admin.OrderDetailsModel
+@{
+    ViewData["Title"] = "Order Details";
+}
+
+<h1>Order Details (Order ID: @Model.Order.ID)</h1>
+
+<p><strong>User:</strong> @Model.UserEmail</p>
+<p><strong>Total Price:</strong> @Model.Order.TotalPrice</p>
+<p><strong>Order Date:</strong> @Model.Order.OrderDate</p>
+
+<h2>Items Purchased</h2>
+
+@if (Model.OrderItems.Count == 0)
+{
+    <p>No items found for this order.</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Item Name</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Subtotal</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.OrderItems)
+            {
+                <tr>
+                    <td>@item.FoodItem.Item_name</td>
+                    <td>@item.Quantity</td>
+                    <td>@item.FoodItem.Price</td>
+                    <td>@(item.FoodItem.Price * item.Quantity)</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+<p>
+    <a asp-page="/Admin/Orders" class="btn btn-secondary">Back to Orders</a>
+</p>

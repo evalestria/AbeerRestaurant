@@ -15,6 +15,7 @@ namespace AbeerRestaurant.Data
         }
 
         public DbSet<AbeerRestaurant.Models.FoodItem> FoodItem { get; set; } = default!;
+        public DbSet<AbeerRestaurant.Models.Order> Orders { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

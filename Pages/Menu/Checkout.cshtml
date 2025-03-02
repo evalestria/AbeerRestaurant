@@ -1,0 +1,42 @@
+﻿@page
+@model AbeerRestaurant.Pages.CheckoutModel
+@{
+    ViewData["Title"] = "Checkout";
+}
+
+<h1>Checkout</h1>
+
+@if (Model.CartItems.Count == 0)
+{
+    <p>Your cart is empty.</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Item Name</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Subtotal</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.CartItems)
+            {
+                <tr>
+                    <td>@item.FoodItem.Item_name</td>
+                    <td>@item.FoodItem.Price</td>
+                    <td>@item.Quantity</td>
+                    <td>@(item.FoodItem.Price * item.Quantity)</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <p><strong>Total: @Model.TotalPrice</strong></p>
+
+    <form method="post">
+        <button type="submit" class="btn btn-success">Complete Purchase</button>
+    </form>
+}

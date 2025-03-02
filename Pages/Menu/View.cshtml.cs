@@ -1,9 +1,11 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Mvc;
 using AbeerRestaurant.Data;
 using AbeerRestaurant.Models;
 
@@ -32,6 +34,33 @@ namespace AbeerRestaurant.Pages.Menu
             }
 
             FoodItem = await query.ToListAsync();
+        }
+
+        public IActionResult OnPostAddToCart(int ItemId)
+        {
+            var cart = GetCart();
+            var item = _context.FoodItem.Find(ItemId);
+            if (item != null)
+            {
+                if (cart.ContainsKey(ItemId))
+                    cart[ItemId]++;
+                else
+                    cart[ItemId] = 1;
+            }
+            SaveCart(cart);
+
+            return RedirectToPage();
+        }
+
+        private Dictionary<int, int> GetCart()
+        {
+            var cart = HttpContext.Session.GetString("Cart");
+            return cart == null ? new Dictionary<int, int>() : JsonSerializer.Deserialize<Dictionary<int, int>>(cart);
+        }
+
+        private void SaveCart(Dictionary<int, int> cart)
+        {
+            HttpContext.Session.SetString("Cart", JsonSerializer.Serialize(cart));
         }
     }
 }
