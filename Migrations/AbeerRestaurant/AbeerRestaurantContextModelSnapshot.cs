@@ -78,7 +78,7 @@ namespace AbeerRestaurant.Migrations.AbeerRestaurant
 
                     b.HasKey("ID");
 
-                    b.ToTable("Orders");
+                    b.ToTable("Orders", (string)null);
                 });
 #pragma warning restore 612, 618
         }

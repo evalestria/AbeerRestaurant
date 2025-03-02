@@ -25,15 +25,16 @@
                 <span asp-validation-for="FoodItem.Item_desc" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="FoodItem.Available" class="control-label"></label>
-                <input asp-for="FoodItem.Available" class="form-control" />
-                <span asp-validation-for="FoodItem.Available" class="text-danger"></span>
+                <label class="control-label">Available</label>
+                <input asp-for="FoodItem.Available" type="checkbox" class="form-check-input" />
             </div>
+
             <div class="form-group">
-                <label asp-for="FoodItem.Vegetarian" class="control-label"></label>
-                <input asp-for="FoodItem.Vegetarian" class="form-control" />
-                <span asp-validation-for="FoodItem.Vegetarian" class="text-danger"></span>
+                <label class="control-label">Vegetarian</label>
+                <input asp-for="FoodItem.Vegetarian" type="checkbox" class="form-check-input" />
             </div>
+
+
             <div class="form-group">
                 <label asp-for="FoodItem.Price" class="control-label"></label>
                 <input asp-for="FoodItem.Price" class="form-control" />
