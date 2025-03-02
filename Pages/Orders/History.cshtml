@@ -1,0 +1,38 @@
+﻿@page
+@model AbeerRestaurant.Pages.Orders.HistoryModel
+@{
+    ViewData["Title"] = "Order History";
+}
+
+<h1>Order History</h1>
+
+@if (Model.Orders.Count == 0)
+{
+    <p>You have no past orders.</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Order ID</th>
+                <th>Date</th>
+                <th>Total Price</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var order in Model.Orders)
+            {
+                <tr>
+                    <td>@order.ID</td>
+                    <td>@order.OrderDate.ToString("yyyy-MM-dd HH:mm")</td>
+                    <td>@order.TotalPrice.ToString("C", new System.Globalization.CultureInfo("en-GB"))</td>
+                    <td>
+                        <a asp-page="/Orders/OrderDetails" asp-route-id="@order.ID" class="btn btn-info">View Details</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

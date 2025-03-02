@@ -1,0 +1,43 @@
+﻿@page "{id:int}"
+@model AbeerRestaurant.Pages.Orders.OrderDetailsModel
+@{
+    ViewData["Title"] = "Order Details";
+}
+
+<h1>Order Details (Order ID: @Model.Order.ID)</h1>
+
+<p><strong>Order Date:</strong> @Model.Order.OrderDate.ToString("yyyy-MM-dd HH:mm")</p>
+<p><strong>Total Price:</strong> @(Model.Order.TotalPrice.ToString("C", new System.Globalization.CultureInfo("en-GB")) ?? "£0.00")</p>
+
+<h2>Items Purchased</h2>
+
+@if (Model.OrderItems.Count == 0)
+{
+    <p>No items found for this order.</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Item Name</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Subtotal</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.OrderItems)
+            {
+                <tr>
+                    <td>@item.FoodItem.Item_name</td>
+                    <td>@item.Quantity</td>
+                    <td>@(item.FoodItem.Price?.ToString("C", new System.Globalization.CultureInfo("en-GB")) ?? "£0.00")</td>
+                    <td>@((item.FoodItem.Price.GetValueOrDefault() * item.Quantity).ToString("C", new System.Globalization.CultureInfo("en-GB")))</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+<a asp-page="/Orders/History" class="btn btn-secondary">Back to Order History</a>
