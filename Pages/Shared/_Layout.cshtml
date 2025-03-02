@@ -92,7 +92,7 @@
             try {
                 let response = await fetch('/Menu/Checkout?handler=CartTotal'); 
                 let totalPrice = await response.text();
-                document.getElementById("cartTotalPrice").innerText = "$" + parseFloat(totalPrice).toFixed(2);
+                document.getElementById("cartTotalPrice").innerText = "£" + parseFloat(totalPrice).toFixed(2);
             } catch (error) {
                 console.error("Failed to load cart total:", error);
             }

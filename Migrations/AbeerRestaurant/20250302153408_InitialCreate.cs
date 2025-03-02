@@ -20,8 +20,9 @@ namespace AbeerRestaurant.Migrations.AbeerRestaurant
                     Item_name = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
                     Item_desc = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
                     Available = table.Column<bool>(type: "bit", nullable: false),
-                    Vegetarian = table.Column<bool>(type: "bit", nullable: true),
-                    Price = table.Column<decimal>(type: "Money", nullable: true)
+                    Vegetarian = table.Column<bool>(type: "bit", nullable: false),
+                    Price = table.Column<decimal>(type: "Money", nullable: true),
+                    ImageUrl = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false)
                 },
                 constraints: table =>
                 {

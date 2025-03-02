@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AbeerRestaurant.Migrations.AbeerRestaurant
 {
     [DbContext(typeof(AbeerRestaurantContext))]
-    [Migration("20250302110238_InitialCreate")]
+    [Migration("20250302153408_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -36,6 +36,11 @@ namespace AbeerRestaurant.Migrations.AbeerRestaurant
                     b.Property<bool>("Available")
                         .HasColumnType("bit");
 
+                    b.Property<string>("ImageUrl")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
                     b.Property<string>("Item_desc")
                         .IsRequired()
                         .HasMaxLength(255)
@@ -49,7 +54,7 @@ namespace AbeerRestaurant.Migrations.AbeerRestaurant
                     b.Property<decimal?>("Price")
                         .HasColumnType("Money");
 
-                    b.Property<bool?>("Vegetarian")
+                    b.Property<bool>("Vegetarian")
                         .HasColumnType("bit");
 
                     b.HasKey("ID");

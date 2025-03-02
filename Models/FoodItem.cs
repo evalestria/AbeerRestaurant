@@ -20,5 +20,8 @@ namespace AbeerRestaurant.Models
         [DataType(DataType.Currency)]
         [Column(TypeName ="Money")]
         public Nullable<decimal> Price { get; set; }
+
+        [StringLength(255)]
+        public string ImageUrl { get; set; } = "default.png";
     }
 }

@@ -17,6 +17,7 @@
 <table class="table">
     <thead>
         <tr>
+            <th>Image</th>
             <th>Item Name</th>
             <th>Description</th>
             <th>Vegetarian</th>
@@ -28,10 +29,13 @@
         @foreach (var item in Model.FoodItem)
         {
             <tr>
+                <td>
+                    <img src="/uploads/@item.ImageUrl" alt="@item.Item_name" class="img-thumbnail" style="max-width: 100px;">
+                </td>
                 <td>@item.Item_name</td>
                 <td>@item.Item_desc</td>
-                <td>@(item.Vegetarian == true ? "Yes" : "No")</td>
-                <td>@item.Price</td>
+                <td>@(item.Vegetarian ? "Yes" : "No")</td>
+                <td>@item.Price?.ToString("C", new System.Globalization.CultureInfo("en-GB"))</td>
                 <td>
                     <form method="post">
                         <input type="hidden" name="ItemId" value="@item.ID" />
