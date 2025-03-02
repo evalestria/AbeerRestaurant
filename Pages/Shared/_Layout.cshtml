@@ -28,9 +28,12 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-page="/Contact">Contact Us</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Menu/Index">Edit Menu</a>
-                        </li>
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-page="/Admin/Admin">Admin Panel</a>
+                            </li>
+                        }
 
                         <!-- Login, Register, Logout -->
                         <li class="nav-item ms-auto">

@@ -54,7 +54,9 @@ using (var scope = app.Services.CreateScope())
     var services = scope.ServiceProvider;
     var context = services.GetRequiredService<AbeerRestaurantContext>();
     context.Database.EnsureCreated();
-    DbInitializer.Initialize(context);
+    var userManager = services.GetRequiredService<UserManager<IdentityUser>>();
+    var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
+    await DbInitializer.Initialize(context, userManager, roleManager);
 }
 
 app.UseHttpsRedirection();

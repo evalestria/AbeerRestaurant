@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace AbeerRestaurant.Pages.Menu
 {
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     public class IndexModel : PageModel
     {
         private readonly AbeerRestaurant.Data.AbeerRestaurantContext _context;

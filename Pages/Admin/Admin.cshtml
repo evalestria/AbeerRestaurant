@@ -1,0 +1,22 @@
+﻿@page
+@model AbeerRestaurant.Pages.Admin.AdminModel
+@{
+    ViewData["Title"] = "Admin Panel";
+}
+
+<h1>Admin Panel</h1>
+
+<p>Welcome, Admin! Manage the restaurant menu from here.</p>
+
+<ul class="list-group">
+
+    <li class="list-group-item">
+        <a asp-page="/Menu/Index">Manage Menu Items</a>
+    </li>
+    <li class="list-group-item">
+        <a asp-page="/Admin/Orders">View Orders (Future Implementation)</a>
+    </li>
+    <li class="list-group-item">
+        <a asp-page="/Admin/Users">Manage Users (Future Implementation)</a>
+    </li>
+</ul>
