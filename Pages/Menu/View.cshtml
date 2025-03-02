@@ -7,6 +7,14 @@
 
 <h1>Menu</h1>
 
+<!-- Search Form -->
+<form method="get">
+    <div class="input-group mb-3">
+        <input type="text" name="SearchQuery" class="form-control" placeholder="Search menu..." value="@Model.SearchQuery">
+        <button type="submit" class="btn btn-primary">Search</button>
+    </div>
+</form>
+
 <table class="table">
     <thead>
         <tr>
@@ -22,7 +30,7 @@
             <tr>
                 <td>@Html.DisplayFor(modelItem => item.Item_name)</td>
                 <td>@Html.DisplayFor(modelItem => item.Item_desc)</td>
-                <td>@Html.DisplayFor(modelItem => item.Vegetarian)</td>
+                <td>@(item.Vegetarian == true ? "Yes" : "No")</td>
                 <td>@Html.DisplayFor(modelItem => item.Price)</td>
             </tr>
         }
