@@ -41,6 +41,13 @@ namespace AbeerRestaurant.Pages.Account
                 return Page();
             }
 
+            var existingUser = await _userManager.FindByEmailAsync(Input.Email);
+            if (existingUser != null)
+            {
+                ModelState.AddModelError(string.Empty, "An account with this email already exists.");
+                return Page();
+            }
+
             var user = new IdentityUser { UserName = Input.Email, Email = Input.Email };
             var result = await _userManager.CreateAsync(user, Input.Password);
 
