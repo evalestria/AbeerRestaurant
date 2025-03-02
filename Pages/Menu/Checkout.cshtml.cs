@@ -27,7 +27,7 @@ namespace AbeerRestaurant.Pages
         public decimal TotalPrice { get; set; } = 0;
 
         [BindProperty]
-        public Dictionary<int, int> Quantities { get; set; } = new(); // Stores updated quantities
+        public Dictionary<int, int> Quantities { get; set; } = new();
 
         public async Task OnGetAsync()
         {
@@ -36,12 +36,12 @@ namespace AbeerRestaurant.Pages
 
         public async Task<IActionResult> OnPostUpdateAsync(int itemId)
         {
-            LoadCart(); // Load cart before updating
+            LoadCart();
 
             if (Quantities.ContainsKey(itemId) && Quantities[itemId] > 0)
             {
                 var cart = GetCartDictionary();
-                cart[itemId] = Quantities[itemId]; // Update quantity
+                cart[itemId] = Quantities[itemId];
                 SaveCart(cart);
             }
 
@@ -50,12 +50,12 @@ namespace AbeerRestaurant.Pages
 
         public async Task<IActionResult> OnPostRemoveAsync(int itemId)
         {
-            LoadCart(); // Load cart before modifying
+            LoadCart();
 
             var cart = GetCartDictionary();
             if (cart.ContainsKey(itemId))
             {
-                cart.Remove(itemId); // Remove item from cart
+                cart.Remove(itemId);
             }
             SaveCart(cart);
 
@@ -64,7 +64,7 @@ namespace AbeerRestaurant.Pages
 
         public async Task<IActionResult> OnPostCompleteAsync()
         {
-            LoadCart(); // Ensure cart is loaded before saving order
+            LoadCart();
 
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
@@ -72,7 +72,7 @@ namespace AbeerRestaurant.Pages
                 return RedirectToPage("/Account/Login");
             }
 
-            if (CartItems.Count == 0) // Prevent saving an empty order
+            if (CartItems.Count == 0)
             {
                 return RedirectToPage("/Menu/View");
             }
@@ -83,8 +83,8 @@ namespace AbeerRestaurant.Pages
                 Items = JsonSerializer.Serialize(CartItems.Select(c => new
                 {
                     FoodItemId = c.FoodItem.ID,  // Store FoodItem ID
-                    Name = c.FoodItem.Item_name, // Store name for reference
-                    Price = c.FoodItem.Price,    // Store price at time of purchase
+                    Name = c.FoodItem.Item_name, // Store name 
+                    Price = c.FoodItem.Price,    // Store price
                     Quantity = c.Quantity
                 }).ToList()),
                 TotalPrice = CartItems.Sum(c => c.FoodItem.Price.GetValueOrDefault() * c.Quantity),

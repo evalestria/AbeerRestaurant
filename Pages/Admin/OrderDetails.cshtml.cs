@@ -44,7 +44,7 @@ namespace AbeerRestaurant.Pages.Admin
 
             OrderItems = rawItems.Select(c => new CartItem
             {
-                FoodItem = _context.FoodItem.FirstOrDefault(f => f.ID == c.FoodItemId), // Now strongly typed!
+                FoodItem = _context.FoodItem.FirstOrDefault(f => f.ID == c.FoodItemId),
                 Quantity = c.Quantity
             }).Where(c => c.FoodItem != null).ToList();
 

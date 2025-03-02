@@ -59,14 +59,14 @@ namespace AbeerRestaurant.Pages.Menu
                 return NotFound();
             }
 
-            // ✅ Update text fields
+            // Update text fields
             foodItem.Item_name = FoodItem.Item_name;
             foodItem.Item_desc = FoodItem.Item_desc;
             foodItem.Price = FoodItem.Price;
             foodItem.Available = FoodItem.Available;
             foodItem.Vegetarian = FoodItem.Vegetarian;
 
-            // ✅ Handle Image Upload
+            // Handle Image Upload
             if (ImageFile != null)
             {
                 var uploadsFolder = Path.Combine(_environment.WebRootPath, "uploads");
@@ -80,7 +80,7 @@ namespace AbeerRestaurant.Pages.Menu
                     await ImageFile.CopyToAsync(stream);
                 }
 
-                // ✅ Update ImageUrl
+                // Update ImageUrl
                 foodItem.ImageUrl = fileName;
             }
 

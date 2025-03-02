@@ -27,7 +27,7 @@ else
                     <td>@user.Email</td>
                     <td>@(user.IsAdmin ? "Admin" : "User")</td>
                     <td>
-                        @if (!user.IsCurrentUser) // Prevent removing self
+                        @if (!user.IsCurrentUser) // Prevent removing yourself!
                         {
                             @if (user.IsAdmin)
                             {

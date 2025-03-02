@@ -39,15 +39,14 @@ namespace AbeerRestaurant.Pages.Menu
                 return Page();
             }
 
-            // ✅ Handle Image Upload
-            string imageUrl = "default.png"; // Store only the filename
+            string imageUrl = "default.png"; 
 
             if (ImageFile != null)
             {
                 var uploadsFolder = Path.Combine(_environment.WebRootPath, "uploads");
                 Directory.CreateDirectory(uploadsFolder);
 
-                var fileName = $"{Guid.NewGuid()}_{Path.GetFileName(ImageFile.FileName)}"; // Generate unique name
+                var fileName = $"{Guid.NewGuid()}_{Path.GetFileName(ImageFile.FileName)}";
                 var filePath = Path.Combine(uploadsFolder, fileName);
 
                 using (var stream = new FileStream(filePath, FileMode.Create))
@@ -55,7 +54,7 @@ namespace AbeerRestaurant.Pages.Menu
                     await ImageFile.CopyToAsync(stream);
                 }
 
-                imageUrl = fileName; // ✅ Store only filename, not full path
+                imageUrl = fileName;
             }
 
             FoodItem.ImageUrl = imageUrl;

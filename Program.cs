@@ -33,12 +33,12 @@ builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
     .AddDefaultTokenProviders();
 
 // Enable session services
-builder.Services.AddDistributedMemoryCache(); // Required for session storage
+builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSession(options =>
 {
-    options.IdleTimeout = TimeSpan.FromMinutes(30); // Session timeout duration
-    options.Cookie.HttpOnly = true; // Prevents client-side access to session cookie
-    options.Cookie.IsEssential = true; // Ensures session works without cookie consent
+    options.IdleTimeout = TimeSpan.FromMinutes(30);
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
 });
 
 // Enable developer exception pages for database errors
@@ -74,7 +74,7 @@ app.UseStaticFiles();
 app.UseRouting();
 app.UseSession();
 
-app.UseAuthentication(); // Enable authentication middleware
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapRazorPages();

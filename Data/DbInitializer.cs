@@ -28,7 +28,7 @@ namespace AbeerRestaurant.Data
                 {
                     UserName = "admin@admin.com",
                     Email = "admin@admin.com",
-                    EmailConfirmed = true // Auto-confirm email
+                    EmailConfirmed = true
                 };
 
                 var result = await userManager.CreateAsync(adminUser, "123456");
@@ -56,6 +56,7 @@ namespace AbeerRestaurant.Data
                 return;
             }
 
+            // 7. Set initial delicious stuff
             var fooditems = new FoodItem[]
             {
                 new FoodItem{Item_name="Basil & Mascarpone Chicken",
@@ -78,6 +79,7 @@ namespace AbeerRestaurant.Data
                     Available=true,Vegetarian=false, Price=9, ImageUrl="product_2428_6109.jpg"}
             };
 
+            // 8. Start cooking!
             context.FoodItem.AddRange(fooditems);
             context.SaveChanges();
         }

@@ -33,7 +33,7 @@ namespace AbeerRestaurant.Pages.Orders
 
             Orders = await _context.Orders
                 .Where(o => o.UserId == user.Id)
-                .OrderByDescending(o => o.OrderDate) // Show latest orders first
+                .OrderByDescending(o => o.OrderDate)
                 .ToListAsync();
 
             return Page();

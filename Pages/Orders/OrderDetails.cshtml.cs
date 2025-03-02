@@ -33,19 +33,18 @@ namespace AbeerRestaurant.Pages.Orders
                 return RedirectToPage("/Account/Login");
             }
 
-            // Ensure the user can only view their own orders
+            // user should only view their own orders
             Order = await _context.Orders.FirstOrDefaultAsync(o => o.ID == id && o.UserId == user.Id);
             if (Order == null)
             {
                 return NotFound();
             }
 
-            // Deserialize Order.Items correctly
             var rawItems = JsonSerializer.Deserialize<List<StoredOrderItem>>(Order.Items);
 
             OrderItems = rawItems.Select(c => new CartItem
             {
-                FoodItem = _context.FoodItem.FirstOrDefault(f => f.ID == c.FoodItemId), // Now strongly typed!
+                FoodItem = _context.FoodItem.FirstOrDefault(f => f.ID == c.FoodItemId),
                 Quantity = c.Quantity
             }).Where(c => c.FoodItem != null).ToList();
 
