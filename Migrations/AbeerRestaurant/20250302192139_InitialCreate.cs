@@ -17,7 +17,7 @@ namespace AbeerRestaurant.Migrations.AbeerRestaurant
                 {
                     ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Item_name = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
+                    Item_name = table.Column<string>(type: "nvarchar(60)", maxLength: 60, nullable: false),
                     Item_desc = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
                     Available = table.Column<bool>(type: "bit", nullable: false),
                     Vegetarian = table.Column<bool>(type: "bit", nullable: false),

@@ -45,8 +45,8 @@ namespace AbeerRestaurant.Migrations.AbeerRestaurant
 
                     b.Property<string>("Item_name")
                         .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("nvarchar(30)");
+                        .HasMaxLength(60)
+                        .HasColumnType("nvarchar(60)");
 
                     b.Property<decimal?>("Price")
                         .HasColumnType("Money");

@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AbeerRestaurant.Migrations.AbeerRestaurant
 {
     [DbContext(typeof(AbeerRestaurantContext))]
-    [Migration("20250302153408_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20250302192145_AddImageUrlToFoodItem")]
+    partial class AddImageUrlToFoodItem
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -48,8 +48,8 @@ namespace AbeerRestaurant.Migrations.AbeerRestaurant
 
                     b.Property<string>("Item_name")
                         .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("nvarchar(30)");
+                        .HasMaxLength(60)
+                        .HasColumnType("nvarchar(60)");
 
                     b.Property<decimal?>("Price")
                         .HasColumnType("Money");

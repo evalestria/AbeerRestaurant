@@ -9,7 +9,7 @@ namespace AbeerRestaurant.Models
         [Key]
         public int ID { get; set; }
 
-        [StringLength(30)]
+        [StringLength(60)]
         public string Item_name { get; set; }
 
         [StringLength(255)]

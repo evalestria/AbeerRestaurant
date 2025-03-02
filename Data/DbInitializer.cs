@@ -19,15 +19,15 @@ namespace AbeerRestaurant.Data
             }
 
             // 2. Check if the admin user exists
-            var adminUser = await userManager.FindByEmailAsync("abeer@abeer.com");
+            var adminUser = await userManager.FindByEmailAsync("admin@admin.com");
 
             if (adminUser == null)
             {
                 // 3. Create admin user if it doesn't exist
                 adminUser = new IdentityUser
                 {
-                    UserName = "abeer@abeer.com",
-                    Email = "abeer@abeer.com",
+                    UserName = "admin@admin.com",
+                    Email = "admin@admin.com",
                     EmailConfirmed = true // Auto-confirm email
                 };
 
@@ -58,12 +58,24 @@ namespace AbeerRestaurant.Data
 
             var fooditems = new FoodItem[]
             {
-                new FoodItem{Item_name="Shepherds Pie",Item_desc="Our tasty shepherds pie packed full of lean minced lamb and an assortment of vegetables",Available=true,Vegetarian=false},
-                new FoodItem{Item_name="Cottage Pie",Item_desc="Our tasty cottage pie packed full of lean minced beef and an assortment of vegetables",Available=true,Vegetarian=false},
-                new FoodItem{Item_name="Haggis,Neeps and Tatties",Item_desc="Scotland national Haggis dish. Sheep’s heart, liver, and lungs are minced, mixed with suet and oatmeal, then seasoned with onion, cayenne, and our secret spice. Served with boiled turnips and potatoes (‘neeps and tatties’)",Available=true,Vegetarian=false},
-                new FoodItem{Item_name="Bangers and Mash",Item_desc="Succulent sausages nestled on a bed of buttery mashed potatoes and drenched in a rich onion gravy",Available=true,Vegetarian=false},
-                new FoodItem{Item_name="Toad in the Hole",Item_desc="Ultimate toad-in-the-hole with caramelised onion gravy",Available=true,Vegetarian=false}
-
+                new FoodItem{Item_name="Basil & Mascarpone Chicken",
+                    Item_desc="Higher-welfare British diced chicken breast marinated with lemon and garlic in a basil pesto and mascarpone sauce, with semi-dried cherry tomatoes.",
+                    Available=true,Vegetarian=false, Price=10, ImageUrl="product_1606_4142.jpg"},
+                new FoodItem{Item_name="Honey & Ginger Chicken",
+                    Item_desc="Soy-marinated higher-welfare British chicken in a honey, ginger and garlic sauce with sesame-topped choi sum, yellow peppers and red onions.",
+                    Available=true,Vegetarian=false, Price=5, ImageUrl="product_2060_4348.png"},
+                new FoodItem{Item_name="Garlic Chicken Curry",
+                    Item_desc="A classic garlic, coriander, onion and tomato sauce with marinated higher-welfare British chicken breast. ",
+                    Available=true,Vegetarian=false, Price=6, ImageUrl="product_407_4338.png"},
+                new FoodItem{Item_name="Veggie Cottage Pie",
+                    Item_desc="Quorn mince cooked in a rich, tomato, red wine and thyme sauce, topped with buttery mash, cheese and parsley.",
+                    Available=true,Vegetarian=true, Price=8, ImageUrl="product_2245_5935.jpg"},
+                new FoodItem{Item_name="Halloumi & Arrabbiata Pasta Bake",
+                    Item_desc="Roasted courgettes, aubergines and halloumi with cannolicchi pasta in a spicy tomato sauce, topped with crumbled feta.",
+                    Available=true,Vegetarian=true, Price=7, ImageUrl="product_1958_6269.jpg"},
+                new FoodItem{Item_name="Teriyaki Salmon Noodles",
+                    Item_desc="Salmon fillet with egg noodles, tenderstem broccoli, mangetout and baby corn in our teriyaki sauce topped with sesame seeds.",
+                    Available=true,Vegetarian=false, Price=9, ImageUrl="product_2428_6109.jpg"}
             };
 
             context.FoodItem.AddRange(fooditems);
