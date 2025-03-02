@@ -26,14 +26,45 @@ namespace AbeerRestaurant.Pages
         public List<CartItem> CartItems { get; set; } = new();
         public decimal TotalPrice { get; set; } = 0;
 
+        [BindProperty]
+        public Dictionary<int, int> Quantities { get; set; } = new(); // Stores updated quantities
+
         public async Task OnGetAsync()
         {
             LoadCart();
         }
 
-        public async Task<IActionResult> OnPostAsync()
+        public async Task<IActionResult> OnPostUpdateAsync(int itemId)
         {
-            LoadCart(); 
+            LoadCart(); // Load cart before updating
+
+            if (Quantities.ContainsKey(itemId) && Quantities[itemId] > 0)
+            {
+                var cart = GetCartDictionary();
+                cart[itemId] = Quantities[itemId]; // Update quantity
+                SaveCart(cart);
+            }
+
+            return RedirectToPage();
+        }
+
+        public async Task<IActionResult> OnPostRemoveAsync(int itemId)
+        {
+            LoadCart(); // Load cart before modifying
+
+            var cart = GetCartDictionary();
+            if (cart.ContainsKey(itemId))
+            {
+                cart.Remove(itemId); // Remove item from cart
+            }
+            SaveCart(cart);
+
+            return RedirectToPage();
+        }
+
+        public async Task<IActionResult> OnPostCompleteAsync()
+        {
+            LoadCart(); // Ensure cart is loaded before saving order
 
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
@@ -41,7 +72,7 @@ namespace AbeerRestaurant.Pages
                 return RedirectToPage("/Account/Login");
             }
 
-            if (CartItems.Count == 0) 
+            if (CartItems.Count == 0) // Prevent saving an empty order
             {
                 return RedirectToPage("/Menu/View");
             }
@@ -51,11 +82,11 @@ namespace AbeerRestaurant.Pages
                 UserId = user.Id,
                 Items = JsonSerializer.Serialize(CartItems.Select(c => new
                 {
-                    FoodItemId = c.FoodItem.ID,  
-                    Name = c.FoodItem.Item_name, 
-                    Price = c.FoodItem.Price,   
+                    FoodItemId = c.FoodItem.ID,  // Store FoodItem ID
+                    Name = c.FoodItem.Item_name, // Store name for reference
+                    Price = c.FoodItem.Price,    // Store price at time of purchase
                     Quantity = c.Quantity
-                }).ToList()), 
+                }).ToList()),
                 TotalPrice = CartItems.Sum(c => c.FoodItem.Price.GetValueOrDefault() * c.Quantity),
                 OrderDate = DateTime.Now
             };
@@ -70,21 +101,25 @@ namespace AbeerRestaurant.Pages
 
         private void LoadCart()
         {
-            var cart = HttpContext.Session.GetString("Cart");
-
-            Console.WriteLine("Cart Data from Session: " + (cart ?? "EMPTY")); 
-
-            var cartDict = cart == null ? new Dictionary<int, int>() : JsonSerializer.Deserialize<Dictionary<int, int>>(cart);
-
-            CartItems = cartDict.Select(c => new CartItem
+            var cart = GetCartDictionary();
+            CartItems = cart.Select(c => new CartItem
             {
                 FoodItem = _context.FoodItem.Find(c.Key),
                 Quantity = c.Value
             }).Where(c => c.FoodItem != null).ToList();
 
-            Console.WriteLine("Cart Items Loaded: " + CartItems.Count); 
-
             TotalPrice = CartItems.Sum(item => item.FoodItem.Price.GetValueOrDefault() * item.Quantity);
+        }
+
+        private Dictionary<int, int> GetCartDictionary()
+        {
+            var cart = HttpContext.Session.GetString("Cart");
+            return cart == null ? new Dictionary<int, int>() : JsonSerializer.Deserialize<Dictionary<int, int>>(cart);
+        }
+
+        private void SaveCart(Dictionary<int, int> cart)
+        {
+            HttpContext.Session.SetString("Cart", JsonSerializer.Serialize(cart));
         }
 
         private void ClearCart()
