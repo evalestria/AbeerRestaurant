@@ -75,8 +75,8 @@ app.UseStaticFiles();
 
 app.UseStaticFiles(new StaticFileOptions
 {
-    FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "uploads")),
-    RequestPath = "/uploads"
+    FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "meals")),
+    RequestPath = "/meals"
 });
 
 app.UseStaticFiles(new StaticFileOptions

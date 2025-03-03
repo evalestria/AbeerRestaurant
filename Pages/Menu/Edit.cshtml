@@ -18,7 +18,7 @@
             <div class="form-group">
                 <label class="control-label">Current Image</label>
                 <div>
-                    <img src="@(string.IsNullOrEmpty(Model.FoodItem.ImageUrl) ? "/uploads/default.png" : $"/uploads/{Model.FoodItem.ImageUrl}")"
+                    <img src="@(string.IsNullOrEmpty(Model.FoodItem.ImageUrl) ? "/meals/default.png" : $"/meals/{Model.FoodItem.ImageUrl}")"
                          alt="Food Image" class="img-thumbnail" style="max-width: 200px;">
                 </div>
             </div>
